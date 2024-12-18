@@ -5,6 +5,7 @@ const db = require("./config/database");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const apiRoutes = require("./routes/api.route");
+const createRoutes = require("./routes/create");
 // Middleware to parse JSON request bodies
 app.use(
   cors({
@@ -17,5 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api", apiRoutes);
+app.use("/create" , createRoutes)
 
 module.exports = app;
