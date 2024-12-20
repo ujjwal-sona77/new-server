@@ -1,6 +1,6 @@
 const productModel = require("../models/product.model");
 const upload = require("../config/multer");
-(module.exports.CreateProduct = upload.single("image")),
+module.exports.CreateProduct = upload.single("image"),
   async (req, res) => {
     try {
       const { name, price, discount } = req.body;

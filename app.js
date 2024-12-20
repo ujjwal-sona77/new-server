@@ -9,7 +9,8 @@ const createRoutes = require("./routes/create");
 // Middleware to parse JSON request bodies
 app.use(
   cors({
-    origin: "https://new-frontend-lemon.vercel.app",
+    // origin: "https://new-frontend-lemon.vercel.app",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
