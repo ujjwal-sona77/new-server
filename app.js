@@ -10,7 +10,7 @@ const createRoutes = require("./routes/create");
 app.use(
   cors({
     // origin: "https://new-frontend-lemon.vercel.app",
-    origin: "http://localhost:5173",
+    origin: "https://new-frontend-lemon.vercel.app",
     credentials: true,
   })
 );
