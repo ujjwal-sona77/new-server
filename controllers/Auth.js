@@ -1,4 +1,4 @@
-const userModel = require("../models/user.model");
+const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -18,9 +18,9 @@ module.exports.UserSignup = async (req, res) => {
         });
         const token = jwt.sign(
           { id: user._id, email: user.email },
-          process.env.JWT_SECRET
+          "getfast"
         );
-        res.cookie("token", token, { httpOnly: true });
+        res.cookie("token", token);
         res.send({ message: "User created successfully", success: true });
       });
     });
@@ -40,8 +40,8 @@ module.exports.LoginUser = async (req, res) => {
     } else {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
-          let token = jwt.sign({ email, id: user._id }, process.env.JWT_SECRET);
-          res.cookie("token", token , {httpOnly: true});
+          let token = jwt.sign({ email, id: user._id }, "getfast");
+          res.cookie("token", token);
           res.status(200).json({ message: "Login successful", success: true });
         } else {
           return res.send({
@@ -54,4 +54,9 @@ module.exports.LoginUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message, success: false });
   }
+};
+
+module.exports.Logout = (req, res) => {
+  res.clearCookie("token");
+  res.send({ message: "Logout successful", success: true });
 };

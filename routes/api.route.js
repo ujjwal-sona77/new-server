@@ -1,27 +1,39 @@
 const express = require("express");
-const router = express.Router();
-const userModel = require("../models/user.model");
-const { LoginUser, UserSignup } = require("../controllers/Auth");
-const { GetAllProducts } = require("../controllers/GetProducts");
-const { GetProfile } = require("../controllers/getUser");
+const app = express.Router();
+const { UserSignup, LoginUser, Logout } = require("../controllers/Auth");
+const { AddToCart } = require("../controllers/AddToCart");
+const { EditUser } = require("../controllers/EditUser");
 const { CreateProduct } = require("../controllers/CreateProduct");
+const { GetProfile } = require("../controllers/GetProfile");
+const { CreateOrder } = require("../controllers/CreateOrder");
 const {
   RemoveProductFromCart,
   DecreaseQuantityOfProduct,
   IncreaseProductQuantity,
-} = require("../controllers/CartControl");
-const { AddToCart } = require("../controllers/AddToCart");
+} = require("../controllers/CartControls");
+const { GetAllProducts } = require("../utils/GetAllProducts");
 
-router.post("/auth/login", LoginUser);
-router.post("/auth/signup", UserSignup);
-router.post("/create/product", CreateProduct);
-router.get("/owner/allproducts", GetAllProducts);
-router.get("/user/profile/:email", GetProfile);
-router.post("/cart/increase/:productid/:email", IncreaseProductQuantity);
+app.post("/auth/signup", UserSignup);
 
-router.post("/cart/decrease/:productid/:email", DecreaseQuantityOfProduct);
+app.post("/auth/login", LoginUser);
 
-router.post("/cart/remove/:productid/:email", RemoveProductFromCart);
-router.post("/cart/add/:productId/:user", AddToCart);
+app.post("/cart/add/:productId/:user", AddToCart);
 
-module.exports = router;
+app.get("/auth/logout", Logout);
+
+app.post("/owner/create/createproduct", CreateProduct);
+
+app.get("/owner/allproducts/", GetAllProducts);
+app.get("/user/profile/:email", GetProfile);
+
+app.post("/cart/increase/:productid/:email", IncreaseProductQuantity);
+
+app.post("/cart/decrease/:productid/:email", DecreaseQuantityOfProduct);
+
+app.post("/cart/remove/:productid/:email", RemoveProductFromCart);
+app.post("/user/editprofile/:email", EditUser);
+
+app.post("/orders/create/:email", CreateOrder);
+
+
+module.exports = app

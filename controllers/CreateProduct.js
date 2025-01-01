@@ -1,6 +1,8 @@
-const productModel = require("../models/product.model");
+const productModel = require("../models/productModel");
 const upload = require("../config/multer");
-module.exports.CreateProduct = upload.single("image"),
+const userModel = require("../models/userModel");
+
+(module.exports.CreateProduct = upload.single("image")),
   async (req, res) => {
     try {
       const { name, price, discount } = req.body;
@@ -13,7 +15,7 @@ module.exports.CreateProduct = upload.single("image"),
       });
       res
         .status(200)
-        .send({ message: "Product created successfully", success: true });
+        .send({ message: "Product created successfully", success: true , product });
     } catch (error) {
       res.status(500).send({ message: error.message, success: false });
     }
