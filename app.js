@@ -11,8 +11,7 @@ app.use(
   cors({
     origin: "https://new-frontend-lemon.vercel.app",
     // origin: "http://localhost:5173",
-    credentials: true,
-    exposedHeaders: ["set-cookie"],
+    credentials: true
   })
 );
 app.use(express.json());
