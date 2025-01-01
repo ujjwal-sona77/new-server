@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const ApiRoutes = require("./routes/api.route");
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://new-frontend-lemon.vercel.app",
     credentials: true,
   })
 );
